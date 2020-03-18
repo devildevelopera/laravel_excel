@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('export', 'MyController@export')->name('export');
-Route::get('importExportView', 'MyController@importExportView');
-Route::post('import', 'MyController@import')->name('import');
+Route::get('/', function () {
+    return view('auth/login');
+});
+
+Auth::routes();
+
+Route::get('export', 'HomeController@export')->name('export');
+Route::post('import', 'HomeController@import')->name('import');
+Route::post('delete', 'HomeController@delete')->name('delete');
+Route::post('deleteone/{id}', 'HomeController@deleteone');
+Route::get('edit/{id}', 'HomeController@edit');
+Route::post('update', 'HomeController@update')->name('update');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

@@ -5,9 +5,9 @@
         <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data" id="form">
             @csrf
             <input type="file" name="file" class="form-control" id="file" style="display: none">
-            <a class="btn btn-success" id="import_button">Import</a>
+            <a class="btn btn-success colorWhite" id="import_button">Import</a>
             <a class="btn btn-dark" href="{{ route('export') }}">Export</a>
-            <a class="btn btn-danger" href="" style="float: right">Datenbank löschen</a>
+            <a data-toggle="modal" data-target="#deleteModal" class="btn btn-danger colorWhite" style="float: right"> Datenbank löschen</a>
         </form>
 </div>
 
@@ -22,8 +22,7 @@
             <th class="text-center">Titel</th>
             <th class="text-center">Vorname</th>
             <th class="text-center">Nachname</th>
-            <th class="text-center">Web</th>
-            <th class="text-center">Type</th>
+            <th class="text-center">Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -33,15 +32,49 @@
             <td class="text-center">{{ $record->strasse }}</td>
             <td class="text-center">{{ $record->plz }}</td>
             <td class="text-center">{{ $record->ort }}</td>
-            <td class="text-center">{{ $record->gender }}</td>
+            <td class="text-center">{{ $record->anrede }}</td>
             <td class="text-center">{{ $record->titel }}</td>
             <td class="text-center">{{ $record->vorname }}</td>
             <td class="text-center">{{ $record->nachname }}</td>
-            <td class="text-center">{{ $record->web }}</td>
-            <td class="text-center">{{ $record->optradio }}</td>
+            <td class="text-center">
+                <form action="/deleteone/{{$record->id}}" method="POST">
+                    <a class="btn btn-outline-success smallbtn" href="/edit/{{$record->id}}">Edit</a>
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger smallbtn">Delete</button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-   
+
+<!-- The Modal -->
+<div class="modal fade" id="deleteModal">
+    <form action="{{ route('delete') }}" id="deleteForm" method="POST">
+        @csrf
+        <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    All records will be deleted from the database.
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="deleteAllRecords()">Delete All</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+
+                </div>
+        </div>
+    </form>
+</div>
+
 @endsection

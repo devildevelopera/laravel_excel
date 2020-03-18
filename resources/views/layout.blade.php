@@ -8,8 +8,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
     <style>
         .container {
             max-width: 1500px;
@@ -18,14 +20,34 @@
         .btn {
             min-width: 150px;
         }
+        .colorWhite {
+            color: #fff !important;
+        }
+        .smallbtn {
+            min-width: 70px !important;
+        }
+        .input-group.mb-3 {
+            max-width: 500px;
+            margin: auto;
+        }
+        .mt-dot5rem {
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card-header">
-        <button class="btn btn-dark">Adressen</button>
-        <button class="btn btn-default" style="float: right">Logout</button>
+        <a class="btn btn-dark"  href="{{ route('home') }}" >Adressen</a>
+        <a class="btn btn-outline-info" style="float: right" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </div>
     @yield('content')
 </div>
@@ -33,12 +55,18 @@
     $(document).ready(function() {
         $('#table').DataTable();
     } );
+
     $('#import_button').click(function(){
         $('#file').trigger('click');
     })
     $('#file').change(function(){
         $('#form').submit();
     })
+
+    function deleteAllRecords()
+     {
+         $("#deleteForm").submit();
+     }
 </script>
 </body>
 </html>
