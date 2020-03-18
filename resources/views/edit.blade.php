@@ -1,6 +1,11 @@
 @extends('layout')
 
 @section('content')
+@if(Session::has('success'))
+    <div class="alert alert-success mt-3">
+        {{Session::get('success')}}
+    </div>
+@endif
 <form class="mt-5" action="{{ route('update') }}" id="updateForm" method="POST">
     @csrf
     <div class="row">
@@ -312,4 +317,5 @@
         </div>
     </div>
 </form>
+
 @endsection

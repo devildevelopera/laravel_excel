@@ -1,6 +1,11 @@
 @extends('layout')
 
 @section('content')
+@if(Session::has('success'))
+    <div class="alert alert-danger mt-2">
+        {{Session::get('success')}}
+    </div>
+@endif
 <div class="mt-5 mb-5">
         <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data" id="form">
             @csrf

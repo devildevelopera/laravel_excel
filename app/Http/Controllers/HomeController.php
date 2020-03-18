@@ -58,7 +58,7 @@ class HomeController extends Controller
     public function deleteone($id)
     {   
         Record::find($id)->delete();
-        return back();
+        return back()->withSuccess('Successfully Deleted!');
     }
 
     public function edit($id)
@@ -108,6 +108,6 @@ class HomeController extends Controller
         $record->freifeld_14 = $request->input('freifeld_14');
         $record->freifeld_15 = $request->input('freifeld_15');
         $record->save();
-        return back();
+        return back()->withSuccess('Successfully Updated!');
     }
 }
