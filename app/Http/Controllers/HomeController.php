@@ -7,6 +7,8 @@ use App\Exports\RecordsExport;
 use App\Imports\RecordsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Record;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\HeadingRowImport;
 
 class HomeController extends Controller
@@ -109,5 +111,12 @@ class HomeController extends Controller
         $record->freifeld_15 = $request->input('freifeld_15');
         $record->save();
         return back()->withSuccess('Successfully Updated!');
+    }
+    public function changePassword(Request $request)
+    {
+        $user = User::where('email', $request->input('email'))->first();
+        $user->password = Hash::make($request->input('newpassword'));
+        $user->save();
+        return back()->withSuccess('Successfully Changed!');
     }
 }

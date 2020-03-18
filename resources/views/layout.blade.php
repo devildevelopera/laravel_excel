@@ -48,6 +48,7 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
+        <a data-toggle="modal" data-target="#changePasswordModal" class="btn btn-warning colorWhite" style="float: right; margin-right: 10px"> Change Password</a>
     </div>
     @yield('content')
 </div>
@@ -67,6 +68,10 @@
      {
          $("#deleteForm").submit();
      }
+    function changePassword()
+    {
+        $("#changePasswordForm").submit();
+    }
 
     $("document").ready(function(){
         setTimeout(function(){

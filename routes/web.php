@@ -25,6 +25,7 @@ Route::post('delete', 'HomeController@delete')->name('delete');
 Route::post('deleteone/{id}', 'HomeController@deleteone');
 Route::get('edit/{id}', 'HomeController@edit');
 Route::post('update', 'HomeController@update')->name('update');
+Route::post('changePassword', 'HomeController@changePassword')->name('changePassword');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
