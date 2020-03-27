@@ -69,7 +69,7 @@
                     <!-- Modal body -->
                     <div style="justify-content: center; display: flex;">
                         <div style="width: 90%;">
-                            <div class="form-group">
+                            <div class="form-group" style="visibility: hidden; height: 0">
                                 <label for="pwd">Email:</label>
                                 <input type="text" class="form-control" id="email" name="email" value="{{{Auth::user()->email}}}">
                             </div>
